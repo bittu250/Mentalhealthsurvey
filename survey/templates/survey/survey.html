@@ -1,0 +1,59 @@
+{% extends "survey/base.html" %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 50px auto; padding: 30px; border-radius: 12px; background-color: #f7f9fc; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; color: #333;">Mental Health Survey</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Name:</label>
+            {{ form.name }}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Age:</label>
+            {{ form.age }}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Sex:</label>
+            {{ form.sex }}
+        </div>
+
+        <h3 style="margin-top: 30px; color: #555;">PHQ-9 Questions</h3>
+        {% for field in phq9_fields %}
+            <div style="margin-bottom: 12px;">
+                <label style="font-weight: bold;">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+
+        <h3 style="margin-top: 30px; color: #555;">Open-ended Questions</h3>
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">How have you been feeling lately?</label>
+            {{ form.open_q1 }}
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Any difficulties at work/school or home?</label>
+            {{ form.open_q2 }}
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Any other thoughts you want to share?</label>
+            {{ form.open_q3 }}
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <button type="submit" style="
+                background-color: #4CAF50; 
+                color: white; 
+                border: none; 
+                padding: 12px 25px; 
+                border-radius: 6px; 
+                font-size: 16px;
+                cursor: pointer;
+            ">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
